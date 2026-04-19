@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+// Hardcoded backend URL — no env var dependency
+const BACKEND = 'https://financeapp-backend-xwai.onrender.com';
+
 const api = axios.create({
-  baseURL: '/api',
-  timeout: 10000,
+  baseURL: `${BACKEND}/api`,
+  timeout: 30000,
 });
 
 api.interceptors.request.use((config) => {
@@ -24,25 +27,25 @@ api.interceptors.response.use(
 );
 
 export const authAPI = {
-  register: (data) => api.post('/auth/register', data),
-  login: (data) => api.post('/auth/login', data),
-  me: () => api.get('/auth/me'),
+  register:      (data) => api.post('/auth/register', data),
+  login:         (data) => api.post('/auth/login', data),
+  me:            ()     => api.get('/auth/me'),
   updateProfile: (data) => api.put('/auth/profile', data),
 };
 
 export const transactionAPI = {
-  getAll: (params) => api.get('/transactions', { params }),
-  create: (data) => api.post('/transactions', data),
-  update: (id, data) => api.put(`/transactions/${id}`, data),
-  delete: (id) => api.delete(`/transactions/${id}`),
-  getSummary: (params) => api.get('/transactions/summary', { params }),
+  getAll:     (params)   => api.get('/transactions', { params }),
+  create:     (data)     => api.post('/transactions', data),
+  update:     (id, data) => api.put(`/transactions/${id}`, data),
+  delete:     (id)       => api.delete(`/transactions/${id}`),
+  getSummary: (params)   => api.get('/transactions/summary', { params }),
 };
 
 export const budgetAPI = {
-  getAll: () => api.get('/budgets'),
+  getAll:     ()      => api.get('/budgets'),
   getByMonth: (month) => api.get(`/budgets/${month}`),
-  save: (data) => api.post('/budgets', data),
-  delete: (id) => api.delete(`/budgets/${id}`),
+  save:       (data)  => api.post('/budgets', data),
+  delete:     (id)    => api.delete(`/budgets/${id}`),
 };
 
 export const dashboardAPI = {
