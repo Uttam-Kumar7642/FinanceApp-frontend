@@ -1,10 +1,7 @@
 import axios from 'axios';
 
-// Hardcoded backend URL — no env var dependency
-const BACKEND = 'https://financeapp-backend-xwai.onrender.com';
-
 const api = axios.create({
-  baseURL: `${BACKEND}/api`,
+  baseURL: '/api',
   timeout: 30000,
 });
 
